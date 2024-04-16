@@ -1,4 +1,6 @@
-function Navbar() {
+import { Link } from "react-router-dom";
+
+function Navbar({ bottomRef }) {
   return (
     <>
       <div className="navbar">
@@ -18,9 +20,15 @@ function Navbar() {
               <a href="#">Contact</a>
             </li>
             <li>
+              <Link to="/newRecipe">Add New Recipe</Link>
+            </li>
+            <li>
               <a
                 onClick={() => {
-                  window.scrollTo(0, document.body.scrollHeight);
+                  window.scrollTo({
+                    top: bottomRef.current.offsetTop,
+                    behavior: "smooth",
+                  });
                 }}
               >
                 End to the Page

@@ -1,13 +1,20 @@
 import { useState } from "react";
 
 /* eslint-disable react/prop-types */
-function RecipeContainer({ recipe, deleteFromArray }) {
+function RecipeContainer({ recipe, deleteFromArray, updateArray }) {
   const [editButton, setEditButton] = useState(true);
   const [recipeTemp, setRecipeTemp] = useState(recipe);
 
   function handleChange(e, key) {
     setRecipeTemp({ ...recipeTemp, [key]: e.target.value });
   }
+
+  const handleButtonClick = () => {
+    setEditButton(!editButton);
+    if (!editButton) {
+      updateArray(recipeTemp);
+    }
+  };
 
   return (
     <>
@@ -20,7 +27,7 @@ function RecipeContainer({ recipe, deleteFromArray }) {
         <div className="recipe">
           <h2>{recipeTemp.title}</h2>
           <div>
-            <button onClick={() => setEditButton(!editButton)}>
+            <button onClick={() => handleButtonClick()}>
               {editButton ? "Edit" : "Save"}
             </button>
             <button

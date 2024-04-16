@@ -1,7 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
 import "./App.css";
-import Navbar from "./Components/Navbar";
-import Footer from "./Components/Footer";
 import RecipeContainer from "./Components/RecipeContainer";
 import "./assets/style.css";
 
@@ -33,17 +31,24 @@ function App() {
     setRecipes(recipes.filter((recipe) => recipe.id !== id));
   }
 
+  function updateArray(updatedRecipe) {
+    setRecipes(
+      recipes.map((recipe) =>
+        recipe.id === updatedRecipe.id ? updatedRecipe : recipe
+      )
+    );
+  }
+
   return (
     <>
-      <Navbar />
       {recipes.map((data) => (
         <RecipeContainer
           recipe={data}
           key={data.id}
           deleteFromArray={deleteFromArray}
+          updateArray={updateArray}
         />
       ))}
-      <Footer />
     </>
   );
 }
